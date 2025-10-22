@@ -1,0 +1,375 @@
+{
+  "info": [
+    {
+      "topic": "Test Documentation Page",
+      "sections": [
+        {
+          "id": "welcome",
+          "title": "Welcome to Test Page",
+          "intro": "This is a test documentation page to demonstrate Compass Docs' multi-source capability.",
+          "subtopics": [
+            {
+              "title": "Purpose",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "This test page exists to show how Compass Docs can handle multiple documentation sources. You can switch between this page and other documentation using the dropdown selector in the header."
+                },
+                {
+                  "type": "note",
+                  "kind": "info",
+                  "message": "Multi-Source Power",
+                  "value": "Compass Docs automatically discovers all JSON files in the src/lib/data/json/ directory and makes them available for selection."
+                }
+              ]
+            },
+            {
+              "title": "Features Demonstrated",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "This page demonstrates several key features of Compass Docs:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Automatic Discovery:</b> This file was automatically detected and added to the source selector."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Instant Switching:</b> You can switch between documentation sources without page reloads."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Dynamic ToC:</b> The table of contents updates automatically based on the current source."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Progress Tracking:</b> The progress indicator shows your position in this documentation."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "examples",
+          "title": "Content Examples",
+          "intro": "Here are examples of all the content types supported by Compass Docs.",
+          "subtopics": [
+            {
+              "title": "Text Blocks",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Text blocks are perfect for paragraphs, descriptions, and explanations. They support automatic URL linking - try visiting https://github.com to see how URLs are automatically converted to clickable links."
+                },
+                {
+                  "type": "text",
+                  "value": "You can use <b>bold tags</b> to emphasize important terms or concepts. Text blocks also support basic HTML formatting for rich content."
+                }
+              ]
+            },
+            {
+              "title": "Code Snippets",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Code blocks come in three variants: single-line, multi-line, and inline. Here's a single-line example:"
+                },
+                {
+                  "type": "code",
+                  "value": "yarn install",
+                  "codeBlock": "single"
+                },
+                {
+                  "type": "text",
+                  "value": "And here's a multi-line code block showing a function:"
+                },
+                {
+                  "type": "code",
+                  "value": "function greetUser(name: string): string {\n  const greeting = `Hello, ${name}!`;\n  console.log(greeting);\n  return greeting;\n}\n\nconst message = greetUser('World');",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Notification Blocks",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Notification blocks highlight important information with visual emphasis. Here are all five types:"
+                },
+                {
+                  "type": "note",
+                  "kind": "info",
+                  "message": "Information",
+                  "value": "Info notes provide helpful context, tips, or additional explanations."
+                },
+                {
+                  "type": "note",
+                  "kind": "success",
+                  "message": "Success",
+                  "value": "Success notes celebrate achievements or confirm that something worked correctly."
+                },
+                {
+                  "type": "note",
+                  "kind": "warning",
+                  "message": "Warning",
+                  "value": "Warning notes alert users to potential issues or things to watch out for."
+                },
+                {
+                  "type": "note",
+                  "kind": "error",
+                  "message": "Error",
+                  "value": "Error notes highlight critical issues that must be addressed immediately."
+                },
+                {
+                  "type": "note",
+                  "kind": "warning-alt",
+                  "message": "Alternative Warning",
+                  "value": "Warning-alt provides an alternative warning style with different visual emphasis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "customization",
+          "title": "Customization Tips",
+          "intro": "Learn how to customize this test page or create your own documentation pages.",
+          "subtopics": [
+            {
+              "title": "Creating Your Own Page",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "To create a new documentation page like this one, follow these steps:"
+                },
+                {
+                  "type": "code",
+                  "value": "# 1. Create a new JSON file in src/lib/data/json/\n# 2. Follow the Topic → Section → Subtopic → Block structure\n# 3. The file will be auto-discovered and added to the selector\n# 4. That's it! No additional configuration needed",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "note",
+                  "kind": "success",
+                  "message": "Zero Configuration",
+                  "value": "Compass Docs automatically discovers and registers all JSON files - no manual setup required!"
+                }
+              ]
+            },
+            {
+              "title": "File Naming Convention",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "JSON file names are automatically converted to display names in the source selector:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>test-documentation.json</b> becomes <b>Test Documentation</b>"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>api-reference.json</b> becomes <b>Api Reference</b>"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>user-guide.json</b> becomes <b>User Guide</b>"
+                },
+                {
+                  "type": "note",
+                  "kind": "info",
+                  "message": "Naming Tip",
+                  "value": "Use kebab-case (lowercase with hyphens) for file names. They'll be automatically converted to Title Case for display."
+                }
+              ]
+            },
+            {
+              "title": "Content Organization",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Organize your documentation logically using the hierarchical structure:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Sections</b> are major chapters or topics (like chapters in a book)"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Subtopics</b> are subsections within each chapter (like subheadings)"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Blocks</b> are individual content pieces (paragraphs, code, notes)"
+                },
+                {
+                  "type": "note",
+                  "kind": "warning",
+                  "message": "Keep It Focused",
+                  "value": "Each subtopic should cover one specific concept or task. If it's getting too long, split it into multiple subtopics."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "playground",
+          "title": "Interactive Playground",
+          "intro": "Use this section to experiment with different content types and see how they render.",
+          "subtopics": [
+            {
+              "title": "Mix and Match",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "You can combine different block types in any order. For example, start with an explanation:"
+                },
+                {
+                  "type": "code",
+                  "value": "const api = 'https://api.example.com/v1';\nconst response = await fetch(`${api}/users`);\nconst data = await response.json();",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "Then add some context or notes about the code:"
+                },
+                {
+                  "type": "note",
+                  "kind": "info",
+                  "message": "API Version",
+                  "value": "Always use the latest API version (v1) for new projects. Legacy versions (v0) will be deprecated soon."
+                },
+                {
+                  "type": "text",
+                  "value": "And continue with more explanation or examples as needed. The layout automatically adapts to your content structure."
+                }
+              ]
+            },
+            {
+              "title": "Best Practices",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>Use descriptive titles:</b> Make subtopic titles clear and specific so users can quickly find what they need."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Break up long text:</b> Use multiple text blocks instead of one huge paragraph. It's easier to read and scan."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Show, don't just tell:</b> Include code examples whenever you're explaining a technical concept."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Use notes strategically:</b> Don't overuse notification blocks - they should highlight truly important information."
+                },
+                {
+                  "type": "note",
+                  "kind": "success",
+                  "message": "You're All Set!",
+                  "value": "You now know how to create and customize documentation with Compass Docs. Start building your own pages!"
+                }
+              ]
+            },
+            {
+              "title": "Testing Scroll & Navigation",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "This subtopic helps test the scroll tracking and table of contents features. As you scroll through the page, notice how:"
+                },
+                {
+                  "type": "text",
+                  "value": "The current section is highlighted in the table of contents"
+                },
+                {
+                  "type": "text",
+                  "value": "Sections automatically expand and collapse based on your position"
+                },
+                {
+                  "type": "text",
+                  "value": "The progress bar updates to show how far you've progressed"
+                },
+                {
+                  "type": "text",
+                  "value": "Clicking any item in the ToC smoothly scrolls to that section"
+                },
+                {
+                  "type": "note",
+                  "kind": "info",
+                  "message": "Smart Navigation",
+                  "value": "The IntersectionObserver API tracks your position and updates the UI in real-time for a seamless reading experience."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "conclusion",
+          "title": "Conclusion",
+          "intro": "This test page demonstrates the core features of Compass Docs. Ready to build your own documentation?",
+          "subtopics": [
+            {
+              "title": "What's Next?",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Now that you've seen how Compass Docs works, here's what you can do:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Create your own content:</b> Add JSON files to src/lib/data/json/ with your documentation."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Customize the theme:</b> Use the preferences panel to switch themes, or create your own custom theme."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Deploy your docs:</b> Run yarn build and deploy to GitHub Pages, Netlify, Vercel, or any static host."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Extend functionality:</b> Add new features, components, or block types to suit your needs."
+                },
+                {
+                  "type": "note",
+                  "kind": "success",
+                  "message": "Happy Documenting!",
+                  "value": "Compass Docs makes documentation beautiful, reactive, and fun to create. Build something amazing!"
+                }
+              ]
+            },
+            {
+              "title": "Resources",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Check out these resources to learn more:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>GitHub Repository:</b> https://github.com/talha-ijaz-qureshi/compass-docs"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Carbon Design System:</b> https://carbondesignsystem.com"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>SvelteKit Documentation:</b> https://kit.svelte.dev"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>TypeScript Handbook:</b> https://www.typescriptlang.org/docs"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
