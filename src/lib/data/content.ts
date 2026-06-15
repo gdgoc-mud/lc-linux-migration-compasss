@@ -1,5 +1,5 @@
 import type { Topic } from '$lib/types/content';
-import data from './json/about-compass-docs.json';
+import data from './json/linux-migration-workshop-1.json';
 
 // Optional: Runtime validation with zod (uncomment to enable)
 // import { z } from 'zod';
@@ -30,6 +30,6 @@ import data from './json/about-compass-docs.json';
 // });
 // const linuxguide: Topic[] = TopicSchema.array().parse(data.linuxguide);
 
-const compassDocs: Topic[] = data.compass as Topic[];
+const compassDocs: Topic[] = data.linuxguide as Topic[];
 
 export default compassDocs;

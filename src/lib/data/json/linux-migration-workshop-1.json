@@ -1,0 +1,1044 @@
+{
+  "linuxguide": [
+    {
+      "topic": "Linux Migration Compass",
+      "sections": [
+        {
+          "id": "introduction",
+          "title": "Introduction to Linux Migration Compass",
+          "intro": "<b>Published: 15th June, 2026</b><br><br>The Linux Migration Compass is a guide designed to help users new to Linux make the switch from Windows. Rather than being tied to any single distribution, this guide covers the universal fundamentals of the Linux ecosystem, from installation all the way to system tuning and application discovery. Whether you end up on Ubuntu, Fedora, Arch, or anything in between, the concepts here apply across the board.",
+          "subtopics": [
+            {
+              "title": "What is Linux?",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Linux is an open-source operating system kernel, first released by Linus Torvalds in 1991. Unlike Windows or macOS, Linux is not a single operating system, it is a kernel that forms the foundation for hundreds of <b>distributions</b> (distros), each packaging that kernel with their own tools, desktop environments, and philosophies. Linux powers everything from Android phones to web servers to supercomputers, and increasingly, personal desktops and laptops."
+                },
+                {
+                  "type": "text",
+                  "value": "What sets Linux apart for everyday users is the degree of control you have over your own system. Nothing runs in the background without your knowledge, there's no telemetry you can't disable, no forced updates, and no licensing wall between you and your tools. The software ecosystem is built on Free and Open-Source Software (FOSS), meaning the code is publicly available, community audited, and free to use."
+                }
+              ]
+            },
+            {
+              "title": "Choosing a Distribution",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Picking a distro can feel overwhelming at first, but the differences are mostly surface-level. The kernel is the same across all of them. What changes is the package manager, the default desktop environment, the release cadence, and the community around it. Here's a quick breakdown of the most common ones for newcomers:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Ubuntu</b> is the most widely documented Linux distro and one of the best starting points for beginners. It uses the APT package manager (Debian-based), ships with GNOME by default, and has a large community that means almost any issue you run into has already been answered somewhere online. LTS (Long-Term Support) releases come out every two years and are supported for five years.<br><br><b>Fedora</b> is Red Hat's community distro, and tends to ship newer software than Ubuntu. It uses the DNF package manager and is a good choice if you want to be closer to the upstream GNOME experience. Fedora Workstation is also one of the best default Wayland experiences available right now.<br><br><b>Linux Mint</b> is Ubuntu-based and ships with the Cinnamon desktop environment, which will feel more immediately familiar if you're coming from Windows. Great for users who want something that just works without much tinkering.<br><br><b>Pop!_OS</b> by System76 is also Ubuntu-based, known for its polished GNOME experience and excellent out-of-the-box hybrid GPU handling. A solid choice for developers and users with NVIDIA hardware.<br><br><b>Arch Linux</b> is a minimal, rolling-release distro where you build your system from the ground up. It is not beginner-friendly by default, but the Arch Wiki is the single most comprehensive Linux resource that exists and helps regardless of what distro you're on.<br><br><b>CachyOS / Garuda</b> are Arch-based distros that ship with performance-oriented defaults, including custom kernels with optimized schedulers. Good choices once you have some Linux experience and want to go deeper on performance tuning."
+                }              
+              ]
+            }
+          ]
+        },
+        {
+          "id": "imageflashing",
+          "title": "Creating a Bootable Live Disk",
+          "intro": "The following section describes how to download a Linux ISO image, write it to a flash drive, and boot into the live installation environment.",
+          "subtopics": [
+            {
+              "title": "Prepare Your System",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Before starting, ensure you have the following:<br>- An x86_64 computer with at least 4GB RAM and 20GB free storage<br>- A USB drive with at least 8GB of storage<br>- A stable internet connection to download the ISO<br>- A backup of all important data on your current system"
+                },
+                {
+                  "type": "note",
+                  "value": "Back up your data to an external drive or cloud storage before proceeding. Partitioning can lead to data loss if not done correctly.",
+                  "kind": "warning-alt",
+                  "message": "Important to Note"
+                }
+              ]
+            },
+            {
+              "title": "Download a Linux ISO",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Head to the official website of your chosen distribution and download the latest ISO. For Ubuntu: https://ubuntu.com/download, for Fedora: https://fedoraproject.org/workstation/, and for Linux Mint: https://linuxmint.com/download.php. Always download from the official source and verify the checksum if available."
+                },
+                {
+                  "type": "note",
+                  "value": "If your system has a discrete NVIDIA GPU, check whether your chosen distro ships a specific NVIDIA ISO. Some distros (like Pop!_OS) do, while others (like Ubuntu and Fedora) handle driver installation post-boot.",
+                  "kind": "info-square",
+                  "message": "NVIDIA Users"
+                }
+              ]
+            },
+            {
+              "title": "Create a Bootable USB",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Use a tool like Rufus https://rufus.ie (Windows) or Balena Etcher https://etcher.balena.io (cross-platform) to flash the ISO to your USB drive:"
+                },
+                {
+                  "type": "text",
+                  "value": "<ol>1. Insert your USB drive.<br>2. Open Rufus or Etcher.<br>3. Select the downloaded ISO file.<br>4. Select your USB drive as the target.<br>5. Click \"Start\" or \"Flash\" to begin writing.</ol>"
+                },
+                {
+                  "type": "note",
+                  "value": "This process will erase all data on the USB drive. Back up anything on it before proceeding.",
+                  "kind": "warning-alt",
+                  "message": "Important to Note"
+                }
+              ]
+            },
+            {
+              "title": "Boot from the USB",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Insert your USB drive into your computer."
+                },
+                {
+                  "type": "text",
+                  "value": "<ol>1. Restart your computer.<br>2. Enter your BIOS/UEFI by pressing the appropriate key at startup (usually ESC, F2, F10, F12, or DEL depending on your manufacturer).<br>3. Set the USB drive as the first boot device in the boot order, or use the one-time boot menu if available.<br>4. Save changes and reboot.</ol> Your computer should boot from the USB and you will see your distro's installation or live session screen."
+                },
+                {
+                  "type": "note",
+                  "value": "Secure Boot may need to be disabled in your BIOS settings to boot from a Linux USB. Most distros support Secure Boot, but if you run into issues booting, disabling it is the first thing to try. BIOS layouts vary by manufacturer, so refer to your computer's documentation.",
+                  "kind": "warning",
+                  "message": "Important Step"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bios",
+          "title": "Understanding the BIOS/UEFI",
+          "intro": "The BIOS (Basic Input/Output System) or its modern successor UEFI (Unified Extensible Firmware Interface) is the firmware that runs before your operating system loads. Understanding it is essential for installing Linux, managing dual-boot setups, and troubleshooting boot issues.",
+          "subtopics": [
+            {
+              "title": "BIOS vs UEFI",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "BIOS is the legacy firmware standard found on older machines. UEFI is the modern replacement, present on most hardware made after 2012. For our purposes, the key difference is that UEFI supports GPT partition tables and requires an EFI System Partition (ESP) to boot, while legacy BIOS uses MBR partition tables. Almost all modern Linux installations target UEFI."
+                }
+              ]
+            },
+            {
+              "title": "What to look for in your BIOS",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "When you enter your BIOS, the key settings relevant to Linux installation are:<br><br><b>Boot Order</b> - Controls what your system tries to boot from first. Set your USB drive to the top during installation.<br><br><b>Secure Boot</b> - A UEFI feature that prevents unsigned bootloaders from loading. Most major distros ship a signed bootloader (GRUB) that is compatible, but some setups require disabling this.<br><br><b>Fast Boot / Fast Startup</b> - A Windows feature that keeps the disk in a partially-mounted state on shutdown, which can prevent Linux from accessing it. If dual-booting, disable Fast Startup in Windows before partitioning.<br><br><b>SATA Mode</b> - Should be set to AHCI, not RAID or Intel RST, for Linux to detect your drive correctly."
+                },
+                {
+                  "type": "note",
+                  "value": "If you are dual-booting with Windows, disable Fast Startup in Windows (Control Panel > Power Options > Choose what the power buttons do > Turn on fast startup) before proceeding with partitioning.",
+                  "kind": "warning",
+                  "message": "Dual-Boot Users"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "partitioning",
+          "title": "All About Partitioning",
+          "intro": "Partitioning is the process of dividing your storage drive into sections, each with a defined purpose. Getting this right is the most important step in the installation process.",
+          "subtopics": [
+            {
+              "title": "Partition Tables: MBR vs GPT",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "A partition table is a data structure at the start of your drive that describes how it is divided. <b>MBR (Master Boot Record)</b> is the legacy format, limited to four primary partitions and drives up to 2TB. <b>GPT (GUID Partition Table)</b> is the modern standard, supports up to 128 partitions, handles drives larger than 2TB, and is required for UEFI boot. If you are on a modern system, you are almost certainly using GPT."
+                }
+              ]
+            },
+            {
+              "title": "Understanding Mount Points",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "In Linux, there is no C: drive or D: drive. Instead, the entire filesystem is a single tree rooted at <b>/</b> (root), and different partitions are mounted at specific points in that tree. The most important mount points to understand during installation are:<br><br><b>/</b> (root) - The base of the entire filesystem. Everything lives here.<br><br><b>/boot/efi</b> - Where the EFI System Partition is mounted. The bootloader (GRUB) lives here and is what UEFI reads to start your OS.<br><br><b>/home</b> - Where user files, settings, and personal data live. Separating this onto its own partition means you can reinstall the OS without losing your files.<br><br><b>swap</b> - Not a directory, but a dedicated partition used as overflow RAM and for hibernation support."
+                }
+              ]
+            },
+            {
+              "title": "What Partitions to Create",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "For a standard UEFI Linux installation, you need at minimum:<br><br><b>EFI System Partition</b> - 512MB, formatted as FAT32, mounted at /boot/efi. If you are dual-booting with Windows, this partition already exists and you simply point the Linux installer to it without reformatting it.<br><br><b>Root partition (/)</b> - At least 20GB, formatted as ext4 or btrfs. This is where the OS itself lives. 40-60GB is comfortable for most setups.<br><br><b>Swap partition</b> - Typically 1x your RAM size for hibernation support, or 2-4GB if you just want overflow. Some distros use a swap file instead of a dedicated partition, which is equally valid.<br><br><b>/home partition (optional but recommended)</b> - The rest of your disk, formatted as ext4 or btrfs. Keeping /home separate makes future reinstalls much cleaner."
+                },
+                {
+                  "type": "note",
+                  "value": "If you are performing a dual-boot installation, you will need to shrink your existing Windows partition first to create free space for Linux. You can do this from within Windows using Disk Management, or from the Linux installer itself. Do not delete the EFI partition that Windows created, it can be shared.",
+                  "kind": "warning-alt",
+                  "message": "Dual-Boot Users"
+                }
+              ]
+            },
+            {
+              "title": "Filesystems",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>ext4</b> is the most widely used Linux filesystem. It is stable, well-supported, and the safe default for most users.<br><br><b>btrfs</b> is a modern copy-on-write filesystem that supports snapshots, compression, and subvolumes. It is the default on Fedora and is increasingly common. Snapshots allow you to roll back the entire system to a previous state, which is extremely useful if an update breaks something.<br><br><b>XFS</b> is a high-performance filesystem used commonly on servers and by Red Hat. Less common on desktops but very capable for large files.<br><br><b>FAT32 / vFAT</b> is required for the EFI partition. It is the only filesystem UEFI firmware can read during boot."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "installation",
+          "title": "Installing Linux",
+          "intro": "Once you have booted from your live USB, you are ready to install. The steps here are broadly similar across most distros, though the installer UI will look different.",
+          "subtopics": [
+            {
+              "title": "The Live Session",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Most Linux distros boot into a live session first, letting you try the OS without touching your drive. This is a great chance to verify your hardware works (Wi-Fi, display, touchpad), explore the desktop environment, and use tools like GParted to inspect and prepare your partitions before running the installer. Take advantage of it."
+                }
+              ]
+            },
+            {
+              "title": "The Installation Process",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Launch the installer from the desktop or dock. Most Linux installers will walk you through:<br><br><ol>1. Language and locale selection<br>2. Keyboard layout<br>3. Network connection (some installers use this to download updates during install)<br>4. Installation type: alongside Windows (automatic dual-boot), erase disk (clean install), or manual/custom partitioning<br>5. Partition assignment (in manual mode)<br>6. Timezone selection<br>7. User account creation and password setup<br>8. Optional full disk encryption</ol>"
+                },
+                {
+                  "type": "note",
+                  "value": "For dual-booting, always choose manual/custom partitioning. The automatic \"install alongside Windows\" option works for simple cases, but manual control gives you confidence over what is being written where.",
+                  "kind": "info",
+                  "message": "Dual-Boot Recommendation"
+                },
+                {
+                  "type": "note",
+                  "value": "The installation step is destructive. Double-check that your target partition or disk is correct before confirming. Selecting the wrong target will erase its contents.",
+                  "kind": "warning-alt",
+                  "message": "Warning"
+                }
+              ]
+            },
+            {
+              "title": "Full Disk Encryption (Optional)",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Most installers will offer to encrypt your drive using LUKS (Linux Unified Key Setup). This encrypts your entire disk, so even if someone physically removes your drive, they cannot read your data without the passphrase. It is recommended, especially for laptops. You will need to enter the passphrase once at every boot before the OS loads."
+                }
+              ]
+            },
+            {
+              "title": "Completing the Installation",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Once installation completes, you will be prompted to reboot. Remove the USB drive when prompted. Your system will reboot into GRUB (the bootloader), which will present you with a menu to choose between Linux and Windows if you dual-booted. Select your Linux install to log in for the first time."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "kernel",
+          "title": "The Linux Kernel",
+          "intro": "The kernel is the core of the operating system. It manages communication between your hardware and the software running on top of it. You do not interact with it directly on a day-to-day basis, but understanding it helps you make sense of how the system works.",
+          "subtopics": [
+            {
+              "title": "What the Kernel Does",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "The kernel handles process scheduling, memory management, hardware abstraction, device drivers, networking, and the filesystem layer. Every time a program reads a file, opens a network connection, or draws a pixel on screen, it is making a request to the kernel via system calls. The kernel decides how and when those requests are fulfilled."
+                }
+              ]
+            },
+            {
+              "title": "Kernel Variants",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>Generic/Mainline kernel</b> - The standard kernel shipped by most distros. Built for broad hardware compatibility and stability.<br><br><b>LTS (Long-Term Support) kernel</b> - Receives security backports and bug fixes for a longer window (typically 6 years). Common on servers and stability-focused distros.<br><br><b>Zen kernel</b> - A patchset that applies lower latency and desktop responsiveness optimizations on top of mainline. Available in Arch-based distros and well-suited for desktop use.<br><br><b>Liquorix</b> - Similar to Zen but targeted at Debian/Ubuntu users. Applies the same latency-focused patchset.<br><br><b>CachyOS kernel</b> - Includes the BORE (Burst-Oriented Response Enhancer) CPU scheduler and various other performance patches. Ships by default on CachyOS but can be built on any distro."
+                }
+              ]
+            },
+            {
+              "title": "Kernel Modules and Drivers",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Device drivers on Linux are implemented as kernel modules. Most hardware drivers are built into the kernel itself and load automatically on boot. You can list currently loaded modules with:"
+                },
+                {
+                  "type": "code",
+                  "value": "lsmod"
+                },
+                {
+                  "type": "text",
+                  "value": "And load or unload modules manually with:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo modprobe <module-name>   # load a module\nsudo modprobe -r <module-name> # unload a module"
+                },
+                {
+                  "type": "text",
+                  "value": "The main area where you will encounter driver issues on Linux is with discrete NVIDIA GPUs. NVIDIA's proprietary driver does not ship in the kernel and must be installed separately. Most distros provide it through their package manager."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "desktopenv",
+          "title": "Desktop Environments",
+          "intro": "A Desktop Environment (DE) is the graphical layer that sits on top of the display server. It provides the window manager, taskbar, file manager, settings panel, and the overall look and feel of your desktop. On Linux, this is entirely separate from the OS itself, meaning you can switch or run multiple DEs on the same install.",
+          "subtopics": [
+            {
+              "title": "The Display Server",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Before getting into DEs, it's worth understanding the display server. This is the component responsible for rendering windows on screen and handling input events. There are two protocols in common use today:<br><br><b>X11 (X.Org)</b> - The older protocol, in use since the 1980s. Universally compatible with almost all applications and DEs. Some advanced gesture and touchpad features require workarounds under X11.<br><br><b>Wayland</b> - The modern replacement. Faster, more secure, better touchpad and HiDPI support, and native gesture handling. Most major DEs now have excellent Wayland compositors. The main caveat is that some older or proprietary applications may have compatibility issues, and NVIDIA's Wayland support, while significantly improved, can still cause issues on certain setups."
+                },
+                {
+                  "type": "note",
+                  "value": "If you have an older NVIDIA GPU, X11 may be more stable for you. On AMD or Intel graphics, Wayland is the recommended choice for any modern DE.",
+                  "kind": "info",
+                  "message": "Display Server Choice"
+                }
+              ]
+            },
+            {
+              "title": "GNOME",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "GNOME is the default desktop environment on Ubuntu, Fedora, Pop!_OS, Debian, and many others. It is designed around a minimal, distraction-free workflow. The top bar handles notifications and system controls, and the Activities overview (Super key) gives you access to windows, workspaces, and search. GNOME is heavily extended through the GNOME Extensions ecosystem at https://extensions.gnome.org, which lets you add a dock, a window list, system monitors, and much more. Customization beyond extensions is done through GNOME Tweaks."
+                }
+              ]
+            },
+            {
+              "title": "KDE Plasma",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "KDE Plasma is the most customizable desktop environment available. Almost every aspect of it can be changed: the panel layout, window decorations, mouse behavior, keyboard shortcuts, the look of individual widgets, and more. Plasma ships with a taskbar-style layout that is immediately familiar to Windows users. It is also one of the lightest feature-rich DEs, using less RAM than GNOME on many setups. KDE comes with its own suite of applications (Dolphin file manager, Kate text editor, Konsole terminal, Gwenview image viewer) that are deeply integrated with the desktop. System Settings in Plasma is the most complete settings panel of any DE on Linux."
+                }
+              ]
+            },
+            {
+              "title": "Cosmic DE",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "COSMIC is a new desktop environment being built by System76, written entirely in Rust. It is designed for both tiling and floating window management and ships as the default on Pop!_OS 24.04 onwards. Being written in Rust makes it resistant to a class of memory safety bugs that affect older compositors. COSMIC is still in active development, but it represents a significant direction for the Linux desktop, particularly for users who want tiling window management without giving up a traditional GUI."
+                }
+              ]
+            },
+            {
+              "title": "XFCE and LXQt",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "XFCE and LXQt are lightweight desktop environments designed for older or low-powered hardware. XFCE is more feature-complete and has been around long enough to be extremely stable. LXQt is even more minimal and uses the Qt toolkit. Both are good choices if you are reviving an older machine or want a fast, no-frills desktop."
+                }
+              ]
+            },
+            {
+              "title": "Tiling Window Managers",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Tiling window managers (TWMs) are a step beyond traditional DEs. Instead of floating windows you drag around, windows are automatically arranged to fill the screen. Popular ones include <b>i3</b>, <b>Sway</b> (Wayland-native i3 fork), <b>Hyprland</b> (a modern Wayland compositor with animations and extensive customization), and <b>bspwm</b>. TWMs require more initial configuration but give you extremely efficient keyboard-driven workflows. If you've seen the highly customized Linux desktops shared online (referred to as \"rice\"), they are almost always TWMs."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "packagemanagers",
+          "title": "Package Managers and Software Distribution",
+          "intro": "On Linux, software is installed and managed through package managers rather than downloading installers from websites. This is one of the most fundamental differences from Windows, and once you are used to it, going back feels slow.",
+          "subtopics": [
+            {
+              "title": "What is a Package Manager?",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "A package manager is a tool that handles downloading, installing, updating, and removing software. It pulls from one or more repositories, which are curated servers containing pre-compiled software packages. The package manager handles dependencies automatically, meaning if you install an application that requires a specific library, it fetches and installs that library too. This is fundamentally different from Windows where each installer is responsible for its own dependencies and there is no central update mechanism for all your software."
+                }
+              ]
+            },
+            {
+              "title": "APT (Debian / Ubuntu-based)",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "APT (Advanced Package Tool) is the package manager used on Ubuntu, Debian, Linux Mint, Pop!_OS, and all their derivatives. Packages are in the .deb format."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt update                  # refresh package lists\nsudo apt upgrade                 # upgrade all installed packages\nsudo apt install <package>       # install a package\nsudo apt remove <package>        # remove a package\nsudo apt autoremove              # remove unused dependencies",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "DNF (Fedora / Red Hat-based)",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "DNF is the package manager used on Fedora and Red Hat-based distributions. Packages are in the .rpm format."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo dnf check-update            # check for updates\nsudo dnf upgrade                 # upgrade all packages\nsudo dnf install <package>       # install a package\nsudo dnf remove <package>        # remove a package",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Pacman (Arch-based)",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Pacman is the package manager on Arch Linux and its derivatives (Manjaro, CachyOS, EndeavourOS). It is fast and minimal. Arch-based distros also have access to the AUR (Arch User Repository), a community-maintained repository of build scripts that lets you install practically any software that exists on Linux."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo pacman -Syu                 # sync and upgrade all packages\nsudo pacman -S <package>         # install a package\nsudo pacman -R <package>         # remove a package\nyay -S <package>                 # install from AUR (yay is an AUR helper)",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Flatpak",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Flatpak is a universal packaging format that works on any Linux distribution. Applications installed via Flatpak run in a sandboxed environment with their own bundled dependencies, which means you get the same version of an app regardless of which distro or which version of a distro you are on. Flathub (https://flathub.org) is the main Flatpak repository and hosts thousands of applications."
+                },
+                {
+                  "type": "code",
+                  "value": "flatpak install flathub <app-id>  # install an app from Flathub\nflatpak update                    # update all Flatpak apps\nflatpak uninstall <app-id>        # remove an app",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "note",
+                  "value": "When searching for an app with flatpak install, it will give you a list of matches. Enter the number of the one you want, then choose whether to install system-wide or just for your user.",
+                  "kind": "info",
+                  "message": "About Flatpak Install"
+                }
+              ]
+            },
+            {
+              "title": "Snap",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Snap is another universal packaging format, developed and maintained by Canonical (the company behind Ubuntu). Like Flatpak, Snap packages bundle their own dependencies. Ubuntu installs certain applications as Snaps by default. They are generally slower to start than native packages and have a more opinionated sandboxing model, which makes them less popular in the broader Linux community compared to Flatpak."
+                }
+              ]
+            },
+            {
+              "title": "Adding Third-Party Repositories",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Some software is not in the official repositories of your distro and needs to be added manually. On Debian/Ubuntu, this is done by adding a PPA (Personal Package Archive) or a custom apt source. For example, to add a signing key and source for a third-party application:"
+                },
+                {
+                  "type": "code",
+                  "value": "# Download and add the signing key\ncurl -fsSL https://example.com/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/example.gpg\n# Add the repository source\necho 'deb [signed-by=/usr/share/keyrings/example.gpg] https://example.com/apt stable main' | sudo tee /etc/apt/sources.list.d/example.list\n# Update and install\nsudo apt update && sudo apt install <package>",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "note",
+                  "value": "Only add repositories from sources you trust. A third-party repository has the ability to push updates to packages on your system. Stick to official sources, well-known projects, and distro-maintained PPAs where possible.",
+                  "kind": "warning",
+                  "message": "Important to Note"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "welcometolinux",
+          "title": "Welcome to Linux",
+          "intro": "Once your system is up, take some time to explore. This section covers the basics of getting oriented, keeping your system updated, and setting up software you'll actually use.",
+          "subtopics": [
+            {
+              "title": "Keeping Your System Up to Date",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "The first thing to do on a fresh install is update. Your ISO may be weeks or months old, so there will be updates available immediately. Most distros have a graphical software update tool, but the terminal is faster and gives you more visibility into what is happening."
+                },
+                {
+                  "type": "text",
+                  "value": "On Debian/Ubuntu-based systems:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt update && sudo apt upgrade"
+                },
+                {
+                  "type": "text",
+                  "value": "On Fedora:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo dnf upgrade"
+                },
+                {
+                  "type": "text",
+                  "value": "On Arch-based systems:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo pacman -Syu"
+                },
+                {
+                  "type": "note",
+                  "value": "Commands starting with sudo run with superuser privileges and will ask for your password. They grant elevated permissions to modify system files and settings. Be deliberate about what you run with sudo.",
+                  "kind": "warning",
+                  "message": "Important to Note"
+                }
+              ]
+            },
+            {
+              "title": "Installing Software",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Most distros ship a graphical software center (GNOME Software, KDE Discover, the Pop!_Shop) where you can browse and install applications without touching the terminal. These tools often integrate both native packages and Flatpak sources in one interface."
+                },
+                {
+                  "type": "text",
+                  "value": "For terminal installs, use your distro's package manager as shown in the Package Managers section. A few browser recommendations while you're getting set up: if you're used to Chrome, it installs normally from https://www.google.com/chrome. If you want a privacy-focused Gecko-based browser, Floorp and Zen are both worth trying. Floorp excels for workspace-heavy workflows, Zen for a compact and minimal browsing experience."
+                },
+                {
+                  "type": "code",
+                  "value": "# Install Floorp on Debian/Ubuntu\ncurl -fsSL https://ppa.floorp.app/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/Floorp.gpg\nsudo curl -sS --compressed -o /etc/apt/sources.list.d/Floorp.list 'https://ppa.floorp.app/Floorp.list'\nsudo apt update && sudo apt install floorp",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "code",
+                  "value": "# Install Zen via Flatpak (any distro)\nflatpak install flathub io.github.zen_browser.zen"
+                }
+              ]
+            },
+            {
+              "title": "GNOME Online Accounts / System Integration",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Under Settings > Online Accounts (on GNOME), you can connect your Google, Microsoft, or other accounts to the system. This allows apps like GNOME Calendar, Files, and Evolution Mail to pull in your data without you having to configure each one separately. KDE has an equivalent under System Settings > Online Accounts."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sysmgmtips",
+          "title": "System Management and Troubleshooting",
+          "intro": "Linux gives you full visibility into what your system is doing and the tools to change it. This section covers the essentials: GPU drivers, power management, system monitoring, and display servers.",
+          "subtopics": [
+            {
+              "title": "GPU Drivers",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>Intel and AMD</b> GPUs are supported by open-source drivers built into the kernel (i915 for Intel, amdgpu for AMD). They load automatically and require no separate installation in almost all cases.<br><br><b>NVIDIA</b> GPUs require proprietary drivers that must be installed manually. On Ubuntu, this can be done through Additional Drivers (in Software & Updates) or via the terminal:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo ubuntu-drivers install       # installs the recommended driver automatically\nsudo apt install nvidia-driver-570 # or specify a version"
+                },
+                {
+                  "type": "text",
+                  "value": "On Fedora, NVIDIA drivers are available through RPM Fusion:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo dnf install akmod-nvidia"
+                },
+                {
+                  "type": "text",
+                  "value": "On Arch-based systems:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo pacman -S nvidia nvidia-utils"
+                },
+                {
+                  "type": "text",
+                  "value": "If your laptop has hybrid graphics (integrated Intel/AMD + discrete NVIDIA), tools like <b>EnvyControl</b> (https://github.com/bayashi-actually/EnvyControl) let you switch between integrated-only, hybrid, and NVIDIA-only modes, which is useful for controlling power consumption."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo envycontrol -s integrated   # use only iGPU (best battery life)\nsudo envycontrol -s hybrid       # PRIME offloading, run specific apps on dGPU\nsudo envycontrol -s nvidia       # use only discrete NVIDIA GPU",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Black Screen on Suspend/Resume",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "A blank screen after waking from suspend is one of the most commonly reported issues on hybrid GPU laptops running Linux. It is most frequently caused by NVIDIA driver or display manager initialization failures on resume. Some things to try:<br><br>1. Update your NVIDIA drivers to the latest available version. Driver quality on suspend/resume has improved significantly since 2024.<br>2. Check that your display refresh rate in settings matches your monitor's native refresh rate. Display managers can fail to reinitialize if there is a mismatch.<br>3. If running Wayland with NVIDIA, try switching to X11 as a test to isolate whether the issue is compositor-related."
+                },
+                {
+                  "type": "note",
+                  "value": "If you are on a laptop with hybrid graphics and the issue persists, switching to integrated-only mode via EnvyControl will resolve it. You trade dGPU performance for reliable suspend behavior.",
+                  "kind": "info-square",
+                  "message": "Workaround"
+                }
+              ]
+            },
+            {
+              "title": "Power Management and Battery Life",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Linux gives you a lot of knobs for power management, which is both its strength and a source of confusion for newcomers. The right approach depends on your hardware and your distro."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>power-profiles-daemon</b> is the modern standard for power profiles on Linux. It exposes three profiles (Power Saver, Balanced, Performance) and is what GNOME's power settings control. It is the recommended starting point on most distros and integrates with the CPU frequency governor automatically."
+                },
+                {
+                  "type": "code",
+                  "value": "powerprofilesctl list                   # see available profiles\npowerprofilesctl set power-saver        # switch to power saver"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>TLP</b> is a more granular power management tool for laptops. It applies a large set of optimizations automatically on boot and on AC/battery transitions, including CPU governor settings, USB autosuspend, PCIe ASPM, and disk power management. Install it and enable it, and it works mostly hands-off."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install tlp tlp-rdw          # on Debian/Ubuntu\nsudo systemctl enable --now tlp"
+                },
+                {
+                  "type": "note",
+                  "value": "TLP and power-profiles-daemon can conflict if both are active and managing the CPU governor. Pick one or configure TLP to leave CPU scaling to power-profiles-daemon. On Fedora, power-profiles-daemon is the default and is usually sufficient without TLP.",
+                  "kind": "warning",
+                  "message": "Important to Note"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>powertop</b> is an Intel tool for monitoring and diagnosing power consumption. It gives you a breakdown of what software and hardware components are consuming power and provides autotune suggestions."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install powertop\nsudo powertop                         # interactive monitor\nsudo powertop --auto-tune             # apply all recommended tweaks (test first)",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "System Resource Monitoring",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "The most basic monitor is <b>top</b>, available on every Linux system. For something more readable, <b>htop</b> and <b>btop</b> are both excellent terminal-based monitors with color output and mouse support."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install htop btop\nhtop   # process and resource monitor\nbtop   # more visual, shows graphs for CPU, RAM, disk, and network",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "For hardware sensor readings (temperatures, fan speeds, voltage):"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install lm-sensors\nsudo sensors-detect   # detect available sensors\nsensors               # read current values",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "For Intel GPU monitoring specifically:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install intel-gpu-tools\nsudo intel_gpu_top"
+                }
+              ]
+            },
+            {
+              "title": "Hardware Acceleration",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Hardware acceleration lets the GPU handle video decoding and graphics rendering instead of the CPU, which significantly reduces power draw during video playback and browser use."
+                },
+                {
+                  "type": "text",
+                  "value": "In Chromium-based browsers, go to Settings > System and enable \"Use hardware acceleration when available\". In Firefox and other Gecko-based browsers, go to Settings > General > Performance. If hardware acceleration is not working through the GUI, you can force it via about:config:"
+                },
+                {
+                  "type": "code",
+                  "value": "layers.acceleration.force-enabled = true\ngfx.webrender.all = true"
+                },
+                {
+                  "type": "text",
+                  "value": "On Ubuntu-based systems, some media codecs are not installed by default for licensing reasons. Install them with:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install ubuntu-restricted-extras gstreamer1.0-plugins-bad"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "advance",
+          "title": "Customization and Tuning",
+          "intro": "One of the genuine advantages of Linux is the depth of customization available. This section covers the areas most useful to get into after you are settled.",
+          "subtopics": [
+            {
+              "title": "Desktop Environment Customization",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "On GNOME, install GNOME Tweaks to unlock additional settings not exposed in the default Settings app, including font configuration, window button placement, and extension management."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install gnome-tweaks    # Debian/Ubuntu\nsudo dnf install gnome-tweaks    # Fedora"
+                },
+                {
+                  "type": "text",
+                  "value": "GNOME Extensions from https://extensions.gnome.org let you add a dock, system monitors, window tiling helpers, clipboard managers, and much more. Install the browser extension for your browser to toggle them directly from the website."
+                },
+                {
+                  "type": "text",
+                  "value": "On KDE Plasma, almost everything is configurable directly from System Settings without third-party tools. Themes, widget layouts, window rules, gestures, and keyboard shortcuts all live there. KDE's Global Theme system lets you swap the entire visual identity of the desktop in one click."
+                }
+              ]
+            },
+            {
+              "title": "Display Server: X11 vs Wayland",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Most distros now default to Wayland sessions. To switch between X11 and Wayland, look for a gear icon or session selector on your login screen. On GDM (GNOME's display manager), click the gear icon after entering your username to select the session type."
+                },
+                {
+                  "type": "note",
+                  "value": "If you have a discrete NVIDIA GPU and experience issues under Wayland (screen tearing, application crashes, broken clipboard), try switching to X11 as a first diagnostic step. NVIDIA Wayland support has improved significantly with driver 545+ but is still not perfect on all hardware.",
+                  "kind": "warning",
+                  "message": "NVIDIA and Wayland"
+                }
+              ]
+            },
+            {
+              "title": "Biometric Authentication",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Linux supports both fingerprint and facial recognition authentication through PAM (Pluggable Authentication Modules), the system-level authentication framework.<br><br><b>Fingerprint</b> is handled by fprintd, which supports most Goodix, Synaptics, Elan, and Validity fingerprint readers. Check if your reader is supported at https://fprint.freedesktop.org/supported-devices.html before installing."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install fprintd libpam-fprintd\nfprintd-enroll       # register your fingerprint\nsudo pam-auth-update # enable fprintd in PAM",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Facial recognition</b> is handled by Howdy, which works with IR and standard webcams. It integrates with PAM in the same way, covering sudo, login, and lock screen authentication."
+                },
+                {
+                  "type": "code",
+                  "value": "# Debian/Ubuntu\nsudo add-apt-repository ppa:boltgolt/howdy\nsudo apt update && sudo apt install howdy",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "After installing, identify your camera device:"
+                },
+                {
+                  "type": "code",
+                  "value": "ls /dev | grep video\nffplay /dev/video0   # preview each device to find your camera"
+                },
+                {
+                  "type": "text",
+                  "value": "Set the device in Howdy's config file and add your face:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo howdy config    # set device_path to your camera device\nsudo howdy add       # register your face"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "terminal",
+          "title": "Terminal Basics",
+          "intro": "The terminal is one of the most useful tools on Linux. You will find yourself using it more and more as you get comfortable, and eventually it becomes faster for most tasks than any GUI. This section covers the commands you will use from day one.",
+          "subtopics": [
+            {
+              "title": "Navigating the Filesystem",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Open your terminal application. On most DEs, it is available in the applications menu or via a keyboard shortcut (Super+T on KDE and Pop!_OS, Ctrl+Alt+T on Ubuntu GNOME)."
+                },
+                {
+                  "type": "code",
+                  "value": "pwd                  # print current directory path\nls                   # list files in current directory\nls -lah              # detailed list with hidden files and human-readable sizes\ncd <directory>       # change directory\ncd ~                 # go to your home directory\ncd ..                # go up one level",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "File Management",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "mkdir <directory>                  # create a new directory\nrm <file>                          # remove a file\nrm -r <directory>                  # remove a directory and its contents\ncp <source> <destination>          # copy a file\nmv <source> <destination>          # move or rename a file\ntouch <file>                       # create an empty file\ncat <file>                         # print file contents to terminal\nnano <file>                        # open file in nano text editor",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Searching",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "find <directory> -name <filename>  # find a file by name\ngrep <pattern> <file>              # search for a pattern inside a file\ngrep -r <pattern> <directory>      # search recursively through a directory",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Process Management",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "ps aux                             # list all running processes\nkill <pid>                         # terminate a process by its PID\npkill <process_name>               # terminate a process by name\njobs                               # list background jobs in current session\nCtrl+C                             # interrupt (stop) the current running process",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "note",
+                  "value": "If you get a \"permission denied\" error, prefix the command with sudo. Be deliberate about this, sudo grants elevated privileges and can modify system files.",
+                  "kind": "info-square",
+                  "message": "Important to Note"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "apps",
+          "title": "Applications and Alternatives",
+          "intro": "Linux has a mature ecosystem of open-source applications. Most things you do on Windows have a Linux equivalent, and in many categories the Linux options are better.",
+          "subtopics": [
+            {
+              "title": "Office and Productivity",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>LibreOffice</b> is the standard office suite on Linux, covering documents (Writer), spreadsheets (Calc), presentations (Impress), and more. It is fully compatible with Microsoft Office formats. Install it from your distro's software center or via your package manager. For collaborative or cloud-based work, the web versions of Google Docs and Microsoft 365 work in any browser."
+                }
+              ]
+            },
+            {
+              "title": "Gaming",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Gaming on Linux has improved dramatically since Steam introduced Proton, a compatibility layer that lets you run a large portion of the Windows Steam library on Linux without any additional setup. Enable it in Steam Settings > Compatibility > Enable Steam Play for all titles."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install steam         # Debian/Ubuntu\nsudo dnf install steam         # Fedora (via RPM Fusion)"
+                },
+                {
+                  "type": "text",
+                  "value": "Lutris is a gaming platform manager that handles games from GOG, Battle.net, Epic, and other sources, using Wine and other compatibility tools. Check game compatibility at https://www.protondb.com before purchasing."
+                },
+                {
+                  "type": "code",
+                  "value": "flatpak install flathub net.lutris.Lutris"
+                },
+                {
+                  "type": "text",
+                  "value": "Discord can be installed as a Flatpak on any distro:"
+                },
+                {
+                  "type": "code",
+                  "value": "flatpak install flathub com.discordapp.Discord"
+                }
+              ]
+            },
+            {
+              "title": "Photo Editing",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>GIMP</b> is the most capable open-source photo and image editor available. It covers most of what Photoshop can do and has a large plugin ecosystem. For something simpler, <b>Pinta</b> is a lightweight editor closer to Paint.NET."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install gimp\nflatpak install flathub com.github.PintaProject.Pinta"
+                }
+              ]
+            },
+            {
+              "title": "Video Editing",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>DaVinci Resolve</b> has a native Linux build available from https://www.blackmagicdesign.com/products/davinciresolve. The free version does not support H.264/H.265 decoding or AAC audio, so you may need to transcode source footage using ffmpeg before importing. If you need to convert H.264 video to a compatible format:"
+                },
+                {
+                  "type": "code",
+                  "value": "ffmpeg -i input.mp4 -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p -c:a copy output.mov"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Kdenlive</b> is the open-source alternative and supports all common formats natively without transcoding. It is a capable editor for most non-professional workflows."
+                },
+                {
+                  "type": "code",
+                  "value": "flatpak install flathub org.kde.kdenlive"
+                }
+              ]
+            },
+            {
+              "title": "Media Players",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>VLC</b> supports virtually every audio and video format and is available on every distro. <b>MPV</b> is a minimal, high-performance player preferred for its scripting and hardware acceleration support."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install vlc mpv"
+                }
+              ]
+            },
+            {
+              "title": "Machine Learning and AI Tools",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Linux is the platform of choice for ML development. Python, PyTorch, TensorFlow, and CUDA toolkits all install cleanly and are better documented on Linux than on Windows. The recommended approach is to manage your Python environments with Conda or uv to keep dependencies isolated."
+                },
+                {
+                  "type": "code",
+                  "value": "# Install Miniconda\nwget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh\nbash Miniconda3-latest-Linux-x86_64.sh",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "For local LLM inference, <b>Ollama</b> is the simplest way to run open-weights models locally. It handles model downloads, quantization, and a local API endpoint automatically."
+                },
+                {
+                  "type": "code",
+                  "value": "curl -fsSL https://ollama.com/install.sh | sh\nollama run llama3.2    # downloads and runs the model"
+                },
+                                {
+                  "type": "text",
+                  "value": "Alternatively, whatever AI tools were taughed in the previous Local & Self-Hosting Campaign's workshop 1 are also able to be setup easily in linux."
+                }
+
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dualboot",
+          "title": "Dual-Boot and Windows Compatibility",
+          "intro": "You do not have to give up Windows to use Linux. Dual-booting lets you keep both operating systems and choose at startup. There are also virtualization options if you need Windows occasionally without rebooting.",
+          "subtopics": [
+            {
+              "title": "Dual-Booting",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Dual-booting installs Linux alongside Windows on the same drive, with GRUB managing the boot menu. Before doing this: disable Fast Startup in Windows, disable Secure Boot if needed, and shrink your Windows partition using Windows Disk Management to create free space for Linux. The Linux installer will then detect the existing Windows installation and set up the dual-boot automatically if you choose the right installation type."
+                },
+                {
+                  "type": "note",
+                  "value": "After installing Linux, Windows updates can occasionally overwrite the GRUB bootloader, leaving you unable to boot into Linux. This is fixable by booting from the Linux USB and running Boot Repair, but it is worth knowing it can happen.",
+                  "kind": "info",
+                  "message": "Heads Up"
+                }
+              ]
+            },
+            {
+              "title": "Virtualization",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Virtualization lets you run Windows inside Linux as a virtual machine. <b>GNOME Boxes</b> is the simplest option for desktop users. <b>virt-manager</b> with KVM/QEMU is the more powerful option, capable of near-native performance with proper GPU passthrough if needed."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install gnome-boxes      # simple VM manager\nsudo apt install virt-manager     # advanced VM management with KVM"
+                }
+              ]
+            },
+            {
+              "title": "Wine and Proton",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Wine is a compatibility layer that translates Windows API calls to Linux equivalents, letting you run many Windows applications without a VM. Proton (used by Steam) is a fork of Wine with additional patches specifically for gaming. For non-gaming Windows software, Bottles (https://usebottles.com) provides a clean GUI for managing Wine environments per-application."
+                },
+                {
+                  "type": "code",
+                  "value": "flatpak install flathub com.usebottles.bottles"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "conclusion",
+          "title": "Your Linux Journey",
+          "intro": "Getting here means you have a working Linux system. Everything from this point is about learning at your own pace and discovering what the platform can do for you.",
+          "subtopics": [
+            {
+              "title": "Resources and Community",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "The single best resource for Linux, regardless of which distro you use, is the <b>Arch Wiki</b> at https://wiki.archlinux.org. Most of what it documents applies system-wide, not just to Arch. For distro-specific help, the Ubuntu forums (https://ubuntuforums.org), Fedora discussion (https://discussion.fedoraproject.org), and the relevant subreddits are all active and welcoming to newcomers."
+                },
+                {
+                  "type": "text",
+                  "value": "Linux has a learning curve that front-loads most of the effort. The first few weeks involve a lot of searching and reading, but that settles quickly. The difference from Windows is that when something goes wrong on Linux, there are tools to understand exactly why, and usually a well-documented fix. You end up actually understanding your system, which is the point."
+                }
+              ]
+            },
+            {
+              "title": "What's Next",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Once you're settled, some directions worth exploring: the terminal gets significantly more powerful once you learn shell scripting and tools like grep, sed, awk, and pipes. Systemd (the init system on most distros) is worth understanding for managing services. And if you want to go deeper on the desktop side, looking into a tiling window manager like Hyprland or i3 is one of the most rewarding rabbit holes Linux has to offer."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

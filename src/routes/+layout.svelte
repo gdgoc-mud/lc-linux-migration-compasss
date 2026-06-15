@@ -15,7 +15,7 @@
   $: topicTitle = $currentSource[0].topic;
   const description = "Compass Docs - A documentation renderer built with SvelteKit and Carbon Design System. Transform structured content into interactive documentation sites with theming, navigation, and a beautifully responsive and sleek design.";
   const keywords = "Documentation, SvelteKit, Carbon Design System, JSON, Static Site Generator, Technical Writing, Developer Tools, Open Source, Documentation System";
-  const url = "https://talha-ijaz-qureshi.github.io/compass-docs";
+  const url = "https://github.com/gdgoc-mud/lc-linux-migration-compasss";
   import { menuOpen } from "$lib/stores/menu";
   import {
 	blur,
@@ -167,7 +167,7 @@
     <footer class="footer">
       <div class="footer-content">
         <h1>{topicTitle}</h1>
-        <h2>Copyleft {currentYear} • Compass Docs • Talha "tal" Ijaz</h2>
+        <h2>Copyleft {currentYear} - Compass Docs - Talha "tal" Ijaz Co-Organiser GDGoC | Linux Campaign<br> Google Developer Group on Campus Murdoch University Dubai</h2>
 
         <div class="logo">
           <Icon
@@ -196,7 +196,7 @@
         </div>
 
         <div class="speshal">
-          <div class="flexitem">
+          <div class="flexitem" style="background-color: #1d1d1d;">
 
             <!-- 
             add your own icons here
@@ -212,6 +212,7 @@
             height="32"
             style="color: #78a9ff"
           /> -->
+          <img class="gdg" src="gdg.png" alt="">
           </div>
           <div class="flexitem" style="">
             <a
@@ -240,7 +241,7 @@
             />
           </a>
           <a
-            href="https://github.com/talha-ijaz-qureshi/compass-docs"
+            href="https://github.com/gdgoc-mud/lc-linux-migration-compasss"
             target="_blank"
             style="text-decoration:none;"
             rel="noopener noreferrer"
@@ -291,6 +292,10 @@
 
   .hide {
     display: none;
+  }
+
+  .gdg {
+    height: 3em;
   }
   
   h1 {
@@ -527,6 +532,10 @@
   @media (max-width: 767px) {
         .slideright {
     transform: translateX(0);
+  }
+
+  .gdg {
+    height: 2em;
   }
 
     .content-area {
