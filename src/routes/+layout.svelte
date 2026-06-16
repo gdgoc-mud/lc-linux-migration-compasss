@@ -15,7 +15,7 @@
   $: topicTitle = $currentSource[0].topic;
   const description = "Compass Docs - A documentation renderer built with SvelteKit and Carbon Design System. Transform structured content into interactive documentation sites with theming, navigation, and a beautifully responsive and sleek design.";
   const keywords = "Documentation, SvelteKit, Carbon Design System, JSON, Static Site Generator, Technical Writing, Developer Tools, Open Source, Documentation System";
-  const url = "https://github.com/gdgoc-mud/lc-linux-migration-compasss";
+  const url = "https://github.com/gdgoc-mud/lc-linux-migration-compass";
   import { menuOpen } from "$lib/stores/menu";
   import {
 	blur,
@@ -241,7 +241,7 @@
             />
           </a>
           <a
-            href="https://github.com/gdgoc-mud/lc-linux-migration-compasss"
+            href="https://github.com/gdgoc-mud/lc-linux-migration-compass"
             target="_blank"
             style="text-decoration:none;"
             rel="noopener noreferrer"
