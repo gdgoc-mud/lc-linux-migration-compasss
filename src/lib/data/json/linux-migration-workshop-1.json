@@ -6,7 +6,7 @@
         {
           "id": "introduction",
           "title": "Introduction to Linux Migration Compass",
-          "intro": "<b>Published: 15th June, 2026</b><br><br>The Linux Migration Compass is a guide designed to help users new to Linux make the switch from Windows. Rather than being tied to any single distribution, this guide covers the universal fundamentals of the Linux ecosystem, from installation all the way to system tuning and application discovery. Whether you end up on Ubuntu, Fedora, Arch, or anything in between, the concepts here apply across the board.",
+          "intro": "<b>Published: 15th June, 2026</b><br><b>Updated: 16th June, 2026</b><br><br>The Linux Migration Compass is a guide designed to help users new to Linux make the switch from Windows. Rather than being tied to any single distribution, this guide covers the universal fundamentals of the Linux ecosystem, from installation all the way to system tuning and application discovery. Whether you end up on Ubuntu, Fedora, Arch, or anything in between, the concepts here apply across the board.",
           "subtopics": [
             {
               "title": "What is Linux?",
@@ -31,7 +31,7 @@
                 {
                   "type": "text",
                   "value": "<b>Ubuntu</b> is the most widely documented Linux distro and one of the best starting points for beginners. It uses the APT package manager (Debian-based), ships with GNOME by default, and has a large community that means almost any issue you run into has already been answered somewhere online. LTS (Long-Term Support) releases come out every two years and are supported for five years.<br><br><b>Fedora</b> is Red Hat's community distro, and tends to ship newer software than Ubuntu. It uses the DNF package manager and is a good choice if you want to be closer to the upstream GNOME experience. Fedora Workstation is also one of the best default Wayland experiences available right now.<br><br><b>Linux Mint</b> is Ubuntu-based and ships with the Cinnamon desktop environment, which will feel more immediately familiar if you're coming from Windows. Great for users who want something that just works without much tinkering.<br><br><b>Pop!_OS</b> by System76 is also Ubuntu-based, known for its polished GNOME experience and excellent out-of-the-box hybrid GPU handling. A solid choice for developers and users with NVIDIA hardware.<br><br><b>Arch Linux</b> is a minimal, rolling-release distro where you build your system from the ground up. It is not beginner-friendly by default, but the Arch Wiki is the single most comprehensive Linux resource that exists and helps regardless of what distro you're on.<br><br><b>CachyOS / Garuda</b> are Arch-based distros that ship with performance-oriented defaults, including custom kernels with optimized schedulers. Good choices once you have some Linux experience and want to go deeper on performance tuning."
-                }              
+                }
               ]
             }
           ]
@@ -121,22 +121,54 @@
               "blocks": [
                 {
                   "type": "text",
-                  "value": "BIOS is the legacy firmware standard found on older machines. UEFI is the modern replacement, present on most hardware made after 2012. For our purposes, the key difference is that UEFI supports GPT partition tables and requires an EFI System Partition (ESP) to boot, while legacy BIOS uses MBR partition tables. Almost all modern Linux installations target UEFI."
+                  "value": "BIOS is the legacy firmware standard found on older machines. UEFI is the modern replacement, present on most hardware made after 2012. The key differences for Linux installation are: UEFI supports GPT partition tables and requires an EFI System Partition (ESP) to boot, while legacy BIOS uses MBR. UEFI also ships with Secure Boot, a signing check that prevents unsigned bootloaders from loading. Almost all modern Linux installations target UEFI."
                 }
               ]
             },
             {
-              "title": "What to look for in your BIOS",
+              "title": "Manufacturer BIOS and Boot Keys",
               "blocks": [
                 {
                   "type": "text",
-                  "value": "When you enter your BIOS, the key settings relevant to Linux installation are:<br><br><b>Boot Order</b> - Controls what your system tries to boot from first. Set your USB drive to the top during installation.<br><br><b>Secure Boot</b> - A UEFI feature that prevents unsigned bootloaders from loading. Most major distros ship a signed bootloader (GRUB) that is compatible, but some setups require disabling this.<br><br><b>Fast Boot / Fast Startup</b> - A Windows feature that keeps the disk in a partially-mounted state on shutdown, which can prevent Linux from accessing it. If dual-booting, disable Fast Startup in Windows before partitioning.<br><br><b>SATA Mode</b> - Should be set to AHCI, not RAID or Intel RST, for Linux to detect your drive correctly."
+                  "value": "Every manufacturer assigns different keys to enter BIOS/UEFI settings and the one-time boot device menu. The boot menu key is what you want for installing Linux, as it lets you select your USB drive without permanently changing boot order. Press these repeatedly right after powering on, as soon as the manufacturer logo appears."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>HP</b><br>BIOS/UEFI Settings: ESC, then F10<br>Boot Menu (one-time): ESC, then F9<br>Note: On HP systems, pressing ESC at startup opens a startup menu first. From there, F9 gives the boot device list and F10 enters BIOS. Some older HP models (Pavilion, TouchSmart) use F1, F10, or F11 directly.<br><br><b>Dell</b><br>BIOS/UEFI Settings: F2<br>Boot Menu (one-time): F12<br>Note: Applies broadly across Inspiron, XPS, Latitude, Precision, and OptiPlex. F12 gives a clean boot device selection list.<br><br><b>Lenovo (IdeaPad, Yoga, Legion, non-ThinkPad)</b><br>BIOS/UEFI Settings: F2 or Fn+F2<br>Boot Menu (one-time): F12<br>Note: Newer Lenovo consumer laptops use F2 to enter BIOS. Some models require holding Fn simultaneously.<br><br><b>Lenovo ThinkPad</b><br>BIOS/UEFI Settings: Enter at the logo, then F1<br>Boot Menu (one-time): F12<br>Note: ThinkPads use a two-step entry. When the ThinkPad splash screen appears, press Enter to pause it, then F1 for BIOS or F12 for the boot menu. Older ThinkPads may use F1 directly at power-on.<br><br><b>ASUS (Laptops)</b><br>BIOS/UEFI Settings: F2<br>Boot Menu (one-time): ESC or F8<br><br><b>ASUS (Desktop Motherboards)</b><br>BIOS/UEFI Settings: DEL or F2<br>Boot Menu (one-time): F8<br><br><b>MSI</b><br>BIOS/UEFI Settings: DEL<br>Boot Menu (one-time): F11<br><br><b>Acer</b><br>BIOS/UEFI Settings: F2 or DEL<br>Boot Menu (one-time): F12<br><br><b>Generic desktop motherboards (Gigabyte, ASRock, etc.)</b><br>BIOS/UEFI Settings: DEL<br>Boot Menu (one-time): F12 or F11"
                 },
                 {
                   "type": "note",
-                  "value": "If you are dual-booting with Windows, disable Fast Startup in Windows (Control Panel > Power Options > Choose what the power buttons do > Turn on fast startup) before proceeding with partitioning.",
+                  "value": "If the manufacturer's logo flashes by too quickly to hit any key, Fast Boot may be enabled in the BIOS. You can disable it from within Windows via Advanced Startup: Settings > System > Recovery > Advanced Startup > Restart Now, then navigate to UEFI Firmware Settings.",
+                  "kind": "info",
+                  "message": "Boot Too Fast?"
+                }
+              ]
+            },
+            {
+              "title": "Setting Boot Order and Selecting a Boot Drive",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Once inside BIOS, the Boot tab (or equivalent) controls what your system tries to boot from and in what order. For installing Linux, you have two approaches:<br><br><b>One-time boot menu (recommended)</b> - Use the manufacturer's boot menu key (usually F12 or F9) to get a one-off device selection without saving any changes. Select your USB drive from the list. This is the cleanest approach for installation as it doesn't alter your permanent boot order.<br><br><b>Change boot order permanently</b> - In the BIOS Boot tab, drag or reorder your USB drive to the top of the list, save with F10, and reboot. The system will now try the USB first every time. Once installation is done, go back and restore the original order (or remove the USB so it falls back to the drive)."
+                },
+                {
+                  "type": "text",
+                  "value": "After Linux is installed, GRUB (the bootloader) registers itself in the UEFI boot order automatically, and your system should show a GRUB menu on the next boot. If it boots straight into Windows, your UEFI may have reprioritized Windows Boot Manager. Enter BIOS and manually move the GRUB entry above Windows Boot Manager."
+                },
+                {
+                  "type": "note",
+                  "value": "After a Windows update, it is not uncommon for Windows to overwrite the GRUB boot entry in the UEFI. If you ever boot straight into Windows and cannot access Linux, boot from the USB and use Boot Repair (available as a tool in most live sessions) to restore GRUB.",
                   "kind": "warning",
                   "message": "Dual-Boot Users"
+                }
+              ]
+            },
+            {
+              "title": "Key BIOS Settings for Linux",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "<b>Secure Boot</b> - May need to be disabled depending on your distro and configuration. Most major distros ship a signed bootloader that is Secure Boot compatible, but if you cannot boot the USB, disabling Secure Boot is the first thing to check.<br><br><b>Fast Boot / Fast Startup</b> - A Windows feature that keeps the disk in a partially-hibernated state. Prevents Linux from cleanly accessing shared partitions. Disable it in Windows (Control Panel > Power Options > Choose what the power buttons do) before partitioning for dual-boot.<br><br><b>SATA Mode</b> - Ensure this is set to AHCI, not RAID or Intel RST. Some Dell and HP systems default to RAID/RST mode, which prevents Linux from seeing the drive correctly without additional configuration.<br><br><b>Virtualization (VT-x / AMD-V)</b> - Enable this if you plan to run virtual machines. Usually found under CPU or Advanced settings."
                 }
               ]
             }
@@ -181,11 +213,17 @@
               ]
             },
             {
-              "title": "Filesystems",
+              "title": "Filesystems in Detail",
               "blocks": [
                 {
                   "type": "text",
-                  "value": "<b>ext4</b> is the most widely used Linux filesystem. It is stable, well-supported, and the safe default for most users.<br><br><b>btrfs</b> is a modern copy-on-write filesystem that supports snapshots, compression, and subvolumes. It is the default on Fedora and is increasingly common. Snapshots allow you to roll back the entire system to a previous state, which is extremely useful if an update breaks something.<br><br><b>XFS</b> is a high-performance filesystem used commonly on servers and by Red Hat. Less common on desktops but very capable for large files.<br><br><b>FAT32 / vFAT</b> is required for the EFI partition. It is the only filesystem UEFI firmware can read during boot."
+                  "value": "Choosing a filesystem is one of the more consequential decisions during install. Here is what you need to know about each one you will realistically encounter:<br><br><b>ext4</b> is the workhorse of Linux filesystems. It has been the default on Ubuntu and Debian-based distros for over a decade. It is journaled (meaning the filesystem maintains a log of changes, so it recovers cleanly from unexpected power loss), stable, and universally supported. The right choice if you want zero surprises.<br><br><b>btrfs</b> is a modern copy-on-write (CoW) filesystem. What CoW means in practice is that when you modify a file, the old version is preserved until the new write is confirmed complete, which dramatically reduces corruption risk. The killer feature is snapshots: you can capture the state of your entire system in seconds and roll back to it if an update breaks something. Fedora uses btrfs by default, as does openSUSE. It is more complex under the hood than ext4 and has a steeper recovery learning curve if something goes wrong, but for most users its day-to-day behavior is identical to ext4.<br><br><b>XFS</b> is a high-performance filesystem used by Red Hat Enterprise Linux by default. It handles large files and parallel I/O very well, making it common on servers. For desktops it is perfectly fine, just less common.<br><br><b>FAT32 / vFAT</b> is required for the EFI System Partition. It is the only filesystem that UEFI firmware can read to load your bootloader. Do not change this.<br><br><b>swap</b> is technically a partition type rather than a filesystem. It gives the kernel a dedicated area of disk to use as overflow RAM and is also required for hibernation. A swap file (instead of a partition) is equally valid and easier to resize later."
+                },
+                {
+                  "type": "note",
+                  "value": "If you want the ability to roll back your system after a bad update (very useful for experiments), pick btrfs for your root partition and set up automatic snapshotting with Snapper or Timeshift. Timeshift with btrfs is the most seamless option and is available in most distro repos.",
+                  "kind": "info",
+                  "message": "Snapshot Recommendation"
                 }
               ]
             }
@@ -557,11 +595,12 @@
               "blocks": [
                 {
                   "type": "text",
-                  "value": "<b>Intel and AMD</b> GPUs are supported by open-source drivers built into the kernel (i915 for Intel, amdgpu for AMD). They load automatically and require no separate installation in almost all cases.<br><br><b>NVIDIA</b> GPUs require proprietary drivers that must be installed manually. On Ubuntu, this can be done through Additional Drivers (in Software & Updates) or via the terminal:"
+                  "value": "<b>Intel and AMD</b> GPUs are supported by open-source drivers built into the kernel (i915 for Intel, amdgpu for AMD). They load automatically and require no separate installation in almost all cases.<br><br><b>NVIDIA</b> GPUs require proprietary drivers that must be installed manually. On Ubuntu, this can be done through Additional Drivers (in Software & Updates) or via terminal:"
                 },
                 {
                   "type": "code",
-                  "value": "sudo ubuntu-drivers install       # installs the recommended driver automatically\nsudo apt install nvidia-driver-570 # or specify a version"
+                  "value": "sudo ubuntu-drivers install       # installs the recommended driver automatically\nsudo apt install nvidia-driver-590 # 590 is the most stable series as of writing;\n                                   # try this if 610+ are giving you grief",
+                  "codeBlock": "multi"
                 },
                 {
                   "type": "text",
@@ -581,11 +620,11 @@
                 },
                 {
                   "type": "text",
-                  "value": "If your laptop has hybrid graphics (integrated Intel/AMD + discrete NVIDIA), tools like <b>EnvyControl</b> (https://github.com/bayashi-actually/EnvyControl) let you switch between integrated-only, hybrid, and NVIDIA-only modes, which is useful for controlling power consumption."
+                  "value": "For laptops with hybrid graphics (integrated Intel/AMD + discrete NVIDIA), EnvyControl (https://github.com/bayashi-actually/EnvyControl) lets you switch between GPU modes. Integrated-only gives you the best battery life, hybrid lets you offload specific apps to the dGPU, and NVIDIA-only pins everything to the discrete card."
                 },
                 {
                   "type": "code",
-                  "value": "sudo envycontrol -s integrated   # use only iGPU (best battery life)\nsudo envycontrol -s hybrid       # PRIME offloading, run specific apps on dGPU\nsudo envycontrol -s nvidia       # use only discrete NVIDIA GPU",
+                  "value": "sudo envycontrol -s integrated   # use only iGPU (best battery life)\nsudo envycontrol -s hybrid       # PRIME offloading: run specific apps on dGPU\nsudo envycontrol -s nvidia       # use only discrete NVIDIA GPU",
                   "codeBlock": "multi"
                 }
               ]
@@ -595,13 +634,79 @@
               "blocks": [
                 {
                   "type": "text",
-                  "value": "A blank screen after waking from suspend is one of the most commonly reported issues on hybrid GPU laptops running Linux. It is most frequently caused by NVIDIA driver or display manager initialization failures on resume. Some things to try:<br><br>1. Update your NVIDIA drivers to the latest available version. Driver quality on suspend/resume has improved significantly since 2024.<br>2. Check that your display refresh rate in settings matches your monitor's native refresh rate. Display managers can fail to reinitialize if there is a mismatch.<br>3. If running Wayland with NVIDIA, try switching to X11 as a test to isolate whether the issue is compositor-related."
+                  "value": "A black screen after waking from suspend is one of the most commonly reported issues on hybrid GPU laptops. It is almost always caused by the NVIDIA driver or the display manager failing to reinitialize the display output on resume. Some things to try:"
+                },
+                {
+                  "type": "text",
+                  "value": "1. Update your NVIDIA drivers. Driver quality on suspend/resume has improved significantly with 545+ series and later. As of writing, the 590 series is the most stable for most setups."
+                },
+                {
+                  "type": "code",
+                  "value": "sudo apt install nvidia-driver-590"
+                },
+                {
+                  "type": "text",
+                  "value": "2. Check your display refresh rate. Based on investigation with journalctl logs, the Intel or NVIDIA graphics driver can fail to reinitialize the display output on resume when the refresh rate selected in settings does not match the monitor's native rate. Wayland in particular may expose refresh rate options beyond what your display was designed for. Set it to your monitor's native refresh rate in Settings > Displays."
                 },
                 {
                   "type": "note",
-                  "value": "If you are on a laptop with hybrid graphics and the issue persists, switching to integrated-only mode via EnvyControl will resolve it. You trade dGPU performance for reliable suspend behavior.",
+                  "value": "This is a subtle one: Wayland compositors can advertise non-native refresh rates that the monitor technically accepts but the driver fails to restore to after resume. Always use the native rate of your panel.",
                   "kind": "info-square",
-                  "message": "Workaround"
+                  "message": "From experience"
+                },
+                {
+                  "type": "text",
+                  "value": "3. If running Wayland with NVIDIA, test X11 as an isolation step to see if the issue is compositor-related. If it does not happen on X11, it is a Wayland/NVIDIA compositor issue rather than a kernel or driver issue.<br><br>4. If none of these resolve it and you are on a hybrid laptop, switching to integrated-only mode via EnvyControl will resolve it definitively. You lose dGPU access but get reliable suspend behavior."
+                }
+              ]
+            },
+            {
+              "title": "Intel Xe Driver (Experimental, 11th Gen+)",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Intel ships two DRM kernel drivers: i915, the production driver that has been around for years, and xe, a ground-up rewrite designed for modern Intel GPU architecture. By default, xe is only active on Lunar Lake (Core Ultra 200V) and Battlemage discrete cards. On Tiger Lake (11th gen), Alder Lake (12th gen), and Raptor Lake (13th gen), i915 is still the default, but xe can be force-enabled."
+                },
+                {
+                  "type": "text",
+                  "value": "The benefits of switching to xe on 11th gen+ hardware include better Vulkan performance, improved OpenCL, GuC and HuC firmware enabled by default (which improves GPU scheduling and media encode/decode efficiency), and a generally more modern driver architecture. That said, it is still considered experimental for pre-Lunar Lake hardware and can have compatibility issues depending on your kernel version and Mesa."
+                },
+                {
+                  "type": "note",
+                  "value": "Only attempt this on kernel 6.8 or newer. Kernel 7.0+ is strongly recommended for Tiger Lake as xe stability on earlier kernels for that generation is inconsistent. Make sure you have a fallback boot option before switching.",
+                  "kind": "warning",
+                  "message": "Version Requirement"
+                },
+                {
+                  "type": "text",
+                  "value": "First, find your GPU's PCI ID:"
+                },
+                {
+                  "type": "code",
+                  "value": "lspci -nnd ::03xx\n# output example: 00:02.0 ... Intel Corporation TigerLake-LP GT2 [Iris Xe Graphics] [8086:9a49]"
+                },
+                {
+                  "type": "text",
+                  "value": "The ID you need is the four-character hex value after the colon in [8086:XXXX]. In the example above it is 9a49. Add the following to your kernel boot parameters via your bootloader (GRUB or systemd-boot), replacing XXXX with your actual ID:"
+                },
+                {
+                  "type": "code",
+                  "value": "i915.force_probe=!XXXX xe.force_probe=XXXX\n\n# For GRUB: add to GRUB_CMDLINE_LINUX_DEFAULT in /etc/default/grub, then:\nsudo update-grub\n\n# For systemd-boot: add to the options line in your boot entry under /boot/loader/entries/",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "Verify it loaded after rebooting:"
+                },
+                {
+                  "type": "code",
+                  "value": "lspci -knnd ::03xx\n# Should show 'Kernel driver in use: xe'"
+                },
+                {
+                  "type": "note",
+                  "value": "If you experience display corruption, color issues, or degraded performance after switching, revert by removing those kernel parameters and running update-grub again. Results vary significantly between hardware revisions, Mesa versions, and kernel versions, so this is worth testing but not guaranteed to improve things on every setup.",
+                  "kind": "warning",
+                  "message": "Revert if needed"
                 }
               ]
             },
@@ -642,6 +747,25 @@
                   "type": "code",
                   "value": "sudo apt install powertop\nsudo powertop                         # interactive monitor\nsudo powertop --auto-tune             # apply all recommended tweaks (test first)",
                   "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>TLP Vendor Battery Care</b><br>TLP goes beyond generic power management and integrates with vendor-specific kernel drivers to enable battery charge threshold control, letting you define at what percentage the battery starts and stops charging. This is one of the most impactful long-term battery health features available on Linux. Support varies by manufacturer:"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>ThinkPad</b> - Full start and stop threshold control via thinkpad_acpi. The most feature-complete implementation, including battery recalibration. Supported since TLP's earliest versions.<br><br><b>Dell</b> - Charge threshold support via dell_laptop, available on kernel 6.12+. Supports start/stop control.<br><br><b>ASUS</b> - Charge control via asus_wmi. Some models only accept specific values (40, 60, 80) for the stop threshold. May require adding asus_wmi to initramfs so it loads early enough at boot.<br><br><b>Lenovo (non-ThinkPad)</b> - Supported on select IdeaPad and Yoga models via ideapad_acpi.<br><br><b>Huawei</b> - Supported via huawei_wmi."
+                },
+                {
+                  "type": "code",
+                  "value": "# Example TLP config in /etc/tlp.conf for a ThinkPad:\nSTART_CHARGE_THRESH_BAT0=75\nSTOP_CHARGE_THRESH_BAT0=85\n\n# After editing, apply:\nsudo tlp start\n\n# Check what TLP detected for your hardware:\nsudo tlp-stat -b",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "note",
+                  "value": "Run sudo tlp-stat -b to see which battery care plugin TLP activated for your hardware and whether the kernel driver it needs is loaded. If thresholds are not taking effect at boot, the required module may be loading too late. Check TLP's documentation at https://linrunner.de/tlp/settings/bc-vendors.html for vendor-specific prerequisites.",
+                  "kind": "info",
+                  "message": "Debugging TLP"
                 }
               ]
             },
@@ -698,6 +822,53 @@
                 {
                   "type": "code",
                   "value": "sudo apt install ubuntu-restricted-extras gstreamer1.0-plugins-bad"
+                }
+              ]
+            },
+            {
+              "title": "Vendor-Specific Drivers and WMI",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Linux exposes hardware sensor data (temperatures, fan speeds, voltages) through the hwmon subsystem. For many laptops, the generic lm-sensors setup is sufficient. However, some manufacturers communicate with their hardware through a proprietary interface called WMI (Windows Management Instrumentation), a firmware-level protocol that, on Linux, requires a dedicated kernel driver to bridge."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>HP WMI Sensors (hp-wmi-sensors)</b><br>HP and HP Compaq business-class machines (EliteBook, ZBook, ProBook) report hardware monitoring data via WMI. The hp-wmi-sensors kernel driver bridges this to Linux's hwmon subsystem, exposing temperature, fan speed, and intrusion sensor data to userspace tools like sensors. The driver was merged into mainline Linux in kernel 6.5 and is available as CONFIG_SENSORS_HP_WMI.<br><br>If your distro ships a kernel older than 6.5, the out-of-tree DKMS version is available at https://github.com/kangtastic/hp-wmi-sensors and builds cleanly on most Debian/Ubuntu systems. On kernel 6.5+, it is simply a matter of loading the module:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo modprobe hp_wmi_sensors\nsensors   # should now show HP WMI sensor readings"
+                },
+                {
+                  "type": "text",
+                  "value": "To load it automatically on boot:"
+                },
+                {
+                  "type": "code",
+                  "value": "echo 'hp_wmi_sensors' | sudo tee /etc/modules-load.d/hp-wmi-sensors.conf"
+                },
+                {
+                  "type": "note",
+                  "value": "The hp-wmi-sensors driver is distinct from the older hp-wmi driver used for hotkeys on consumer HP laptops. If both try to use the same WMI event GUID, alarm attributes on sensors will be unavailable. Business-class HP hardware (ZBook, EliteBook) is the target; consumer models may behave inconsistently.",
+                  "kind": "info",
+                  "message": "HP Business-Class Only"
+                },
+                {
+                  "type": "text",
+                  "value": "<b>ThinkPad ACPI (thinkpad_acpi)</b><br>ThinkPads have a dedicated kernel driver, thinkpad_acpi, that exposes features not covered by generic ACPI: fan control, keyboard backlight, Bluetooth and Wi-Fi toggles, thermal alarms, and hardware hotkeys. It loads automatically on ThinkPad hardware and is the backend that tools like tp-fan and TLP's ThinkPad battery care plugin use. Check the official documentation at https://www.kernel.org/doc/html/latest/admin-guide/laptops/thinkpad-acpi.html for a full feature list specific to your model."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>ASUS WMI (asus-wmi)</b><br>ASUS laptops expose fan curves, display overdrive, power modes, keyboard backlight, and charging thresholds through the asus-wmi driver. It loads automatically on supported hardware. On ROG and TUF models, the asusctl tool (https://gitlab.com/asus-linux/asusctl) provides a higher-level interface for fan curves and power profiles that asus-wmi exposes."
+                },
+                {
+                  "type": "text",
+                  "value": "<b>Dell (dell_laptop / dell-wmi)</b><br>Dell laptops expose ACPI features through dell_laptop and dell-wmi, covering keyboard backlight, thermal modes, and on kernel 6.12+ battery charge thresholds. TLP integrates with this automatically for charge control on supported models."
+                },
+                {
+                  "type": "text",
+                  "value": "The kernel documentation index for all hwmon drivers (including vendor-specific ones) lives at https://www.kernel.org/doc/Documentation/hwmon/ and is the authoritative reference for what a given driver exposes and how."
                 }
               ]
             }
@@ -786,6 +957,87 @@
           ]
         },
         {
+          "id": "bashscripting",
+          "title": "Bash Scripting Basics",
+          "intro": "The terminal commands covered in this guide are executed one at a time interactively. Bash scripting lets you chain those commands into reusable scripts — automating tasks, creating your own tools, and understanding what scripts you download actually do. This section covers enough to read and write basic scripts.",
+          "subtopics": [
+            {
+              "title": "What is a Bash Script?",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "A bash script is a plain text file containing a sequence of shell commands that are executed in order. The first line declares the interpreter with a shebang:"
+                },
+                {
+                  "type": "code",
+                  "value": "#!/bin/bash"
+                },
+                {
+                  "type": "text",
+                  "value": "Save the file with a .sh extension, make it executable, and run it:"
+                },
+                {
+                  "type": "code",
+                  "value": "chmod +x myscript.sh\n./myscript.sh"
+                }
+              ]
+            },
+            {
+              "title": "Variables and User Input",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "#!/bin/bash\nNAME=\"Talha\"              # assign a variable (no spaces around =)\necho \"Hello, $NAME\"      # use it with $\n\nread -p \"Enter your name: \" USER_INPUT  # prompt for input\necho \"You entered: $USER_INPUT\"",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Conditionals and Loops",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "#!/bin/bash\n\n# if/else\nif [ -f \"/etc/os-release\" ]; then\n    echo \"OS release file found\"\nelse\n    echo \"Not found\"\nfi\n\n# for loop\nfor i in 1 2 3 4 5; do\n    echo \"Count: $i\"\ndone\n\n# while loop\nCOUNTER=0\nwhile [ $COUNTER -lt 5 ]; do\n    echo \"Counter: $COUNTER\"\n    COUNTER=$((COUNTER + 1))\ndone",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Functions and Arguments",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "#!/bin/bash\n\n# $1, $2... are positional arguments passed to the script\necho \"First argument: $1\"\necho \"Second argument: $2\"\n\n# Define a function\ngreet() {\n    echo \"Hello, $1!\"\n}\n\ngreet \"world\"   # call it",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Practical Example: System Info Script",
+              "blocks": [
+                {
+                  "type": "code",
+                  "value": "#!/bin/bash\necho \"=== System Info ===\"\necho \"Hostname: $(hostname)\"\necho \"Kernel: $(uname -r)\"\necho \"Uptime: $(uptime -p)\"\necho \"Disk usage (root):\"\ndf -h / | tail -1\necho \"RAM usage:\"\nfree -h | grep Mem",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Where to Learn More",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "The above covers the basics to get started. For a deeper dive, the best free resources are:<br><br><b>The Bash Guide</b> at https://mywiki.wooledge.org/BashGuide - thorough and accurately covers Bash behavior including common pitfalls.<br><br><b>Bash Scripting Tutorial</b> at https://linuxconfig.org/bash-scripting-tutorial-for-beginners - good for working through examples progressively.<br><br><b>man bash</b> in your terminal - the complete reference manual, searchable with / once open."
+                },
+                {
+                  "type": "code",
+                  "value": "man bash"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "terminal",
           "title": "Terminal Basics",
           "intro": "The terminal is one of the most useful tools on Linux. You will find yourself using it more and more as you get comfortable, and eventually it becomes faster for most tasks than any GUI. This section covers the commands you will use from day one.",
@@ -837,6 +1089,124 @@
                   "value": "If you get a \"permission denied\" error, prefix the command with sudo. Be deliberate about this, sudo grants elevated privileges and can modify system files.",
                   "kind": "info-square",
                   "message": "Important to Note"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "systemd",
+          "title": "systemd and Service Management",
+          "intro": "systemd is the init system used by almost every major Linux distribution. It is the first process that runs after the kernel (PID 1) and is responsible for starting everything else: services, mounts, timers, login sessions. Understanding it makes Linux significantly more manageable.",
+          "subtopics": [
+            {
+              "title": "Managing Services",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Services on Linux are managed with systemctl. The commands you will use most often:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo systemctl start <service>      # start a service now\nsudo systemctl stop <service>       # stop a service\nsudo systemctl restart <service>    # restart it\nsudo systemctl status <service>     # show its current state and recent logs\nsudo systemctl enable <service>     # start automatically at boot\nsudo systemctl disable <service>    # remove from autostart\nsudo systemctl enable --now <service> # enable and start in one command",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "To see all running services and their status:"
+                },
+                {
+                  "type": "code",
+                  "value": "systemctl list-units --type=service --state=running"
+                }
+              ]
+            },
+            {
+              "title": "Reading Service Logs with journalctl",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "journalctl is systemd's log viewer. All service output goes here, which makes it the first place to look when something isn't starting."
+                },
+                {
+                  "type": "code",
+                  "value": "journalctl -u <service>             # all logs for a service\njournalctl -u <service> -f          # follow live output (like tail -f)\njournalctl -u <service> --since today  # logs from today only\njournalctl -b                       # all logs from this boot\njournalctl -p err -b                # only errors from this boot",
+                  "codeBlock": "multi"
+                }
+              ]
+            },
+            {
+              "title": "Unit File Structure",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "Every service is defined by a unit file. System-provided unit files live in /usr/lib/systemd/system/. Your own or customized units go in /etc/systemd/system/, which takes precedence. A basic service unit file looks like this:"
+                },
+                {
+                  "type": "code",
+                  "value": "[Unit]\nDescription=My Custom Service\nAfter=network.target\n\n[Service]\nType=simple\nExecStart=/usr/bin/python3 /opt/myapp/main.py\nRestart=on-failure\nRestartSec=5s\n\n[Install]\nWantedBy=multi-user.target",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "Key fields in [Service]:<br><br><b>Type</b> - How systemd tracks the service. simple means the process started by ExecStart is the service. forking means the process forks to the background (set this for traditional daemons). oneshot is for scripts that run and exit. notify means the service tells systemd explicitly when it is ready.<br><br><b>ExecStart</b> - The command that starts the service. Must be an absolute path. No shell expansion (~, $HOME) happens here; use full paths.<br><br><b>Restart</b> - When to restart automatically. on-failure restarts only on non-zero exit. always restarts unconditionally. on-abnormal restarts on signal/timeout/watchdog.<br><br><b>After</b> - Ordering: this unit starts after the listed ones are active."
+                },
+                {
+                  "type": "note",
+                  "value": "Never edit files in /usr/lib/systemd/system/ directly. Package updates will overwrite your changes. Use drop-in overrides instead.",
+                  "kind": "warning",
+                  "message": "Important to Note"
+                }
+              ]
+            },
+            {
+              "title": "Creating and Editing Services",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "To create a new service, write a unit file to /etc/systemd/system/:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo nano /etc/systemd/system/myservice.service\n# write your unit file, save, then:\nsudo systemctl daemon-reload\nsudo systemctl enable --now myservice",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "To modify an existing system service without touching the original unit file, use a drop-in override. This is the clean way to change just one or two directives:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo systemctl edit <service>\n# This opens an editor and creates /etc/systemd/system/<service>.d/override.conf\n# Only write the sections and directives you want to change, for example:\n[Service]\nRestart=always\nRestartSec=10s",
+                  "codeBlock": "multi"
+                },
+                {
+                  "type": "text",
+                  "value": "After any change to a unit file:"
+                },
+                {
+                  "type": "code",
+                  "value": "sudo systemctl daemon-reload"
+                },
+                {
+                  "type": "note",
+                  "value": "Forgetting daemon-reload after editing a unit file is one of the most common sources of confusion when edits don't seem to take effect. Always run it.",
+                  "kind": "info-square",
+                  "message": "Common Gotcha"
+                }
+              ]
+            },
+            {
+              "title": "systemd Timers",
+              "blocks": [
+                {
+                  "type": "text",
+                  "value": "systemd timers are a cron replacement that integrate with the rest of the service management framework. Each timer has a paired .service unit and a .timer unit that defines when it runs. They are more flexible than cron and their output goes to journalctl like any other service."
+                },
+                {
+                  "type": "code",
+                  "value": "# Example: /etc/systemd/system/backup.timer\n[Unit]\nDescription=Run backup daily\n\n[Timer]\nOnCalendar=daily\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n\n# List all active timers:\nsystemctl list-timers",
+                  "codeBlock": "multi"
                 }
               ]
             }
@@ -952,11 +1322,10 @@
                   "type": "code",
                   "value": "curl -fsSL https://ollama.com/install.sh | sh\nollama run llama3.2    # downloads and runs the model"
                 },
-                                {
+                {
                   "type": "text",
-                  "value": "Alternatively, whatever AI tools were taughed in the previous Local & Self-Hosting Campaign's workshop 1 are also able to be setup easily in linux."
+                  "value": "Alternatively, whatever AI tools were taught in the previous Local & Self-Hosting Campaign's workshop 1 are also able to be setup easily in linux."
                 }
-
               ]
             }
           ]
